@@ -10,4 +10,7 @@ public interface OmdbApiService {
     @GET(KEY)
     Call<SearchModel> searchByTitle(@Query("s") String title);
 
+    @GET(KEY)
+    Call<ItemDetailsModel> searchById(@Query("i") String id);
+
 }

@@ -2,10 +2,12 @@ package com.example.listaapifilmes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -38,18 +40,19 @@ public class MainActivity extends AppCompatActivity {
 
         btnSearch = findViewById(R.id.btnSearch);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.omdbapi.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        Retrofit retrofit = Util.createRetrofitImdb();
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(editTextSearch.getText().toString().isEmpty()){
+                    editTextSearch.setError("Por favor pesquise algo!");
+                    return;
+                }
                 OmdbApiService omdbApiService = retrofit.create(OmdbApiService.class);
 
                 //isso sim precisa entender:
-                String title = editTextSearch.getText().toString();
+                String title = editTextSearch.getText().toString().trim();
                 Call<SearchModel> call = omdbApiService.searchByTitle(title);
 
                 call.enqueue(new Callback<SearchModel>() {
@@ -61,6 +64,17 @@ public class MainActivity extends AppCompatActivity {
                         CustomListAdapter adapter = new CustomListAdapter(MainActivity.this, searchModel.Search);
 
                         listViewItensApi.setAdapter(adapter);
+
+                        listViewItensApi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                ItemApiModel itemClicado = searchModel.Search.get(position);
+
+                                Intent intent = new Intent(MainActivity.this, ItemApiDetails.class);
+                                intent.putExtra("imdbId", itemClicado.imdbID);
+                                startActivity(intent);
+                            }
+                        });
                     }
 
                     @Override
