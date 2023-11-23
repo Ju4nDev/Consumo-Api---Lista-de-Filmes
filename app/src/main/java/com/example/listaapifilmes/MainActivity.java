@@ -40,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
         btnSearch = findViewById(R.id.btnSearch);
 
-        Retrofit retrofit = Util.createRetrofitImdb();
-
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     editTextSearch.setError("Por favor pesquise algo!");
                     return;
                 }
-                OmdbApiService omdbApiService = retrofit.create(OmdbApiService.class);
+                OmdbApiService omdbApiService = Util.createRetrofitImdb().create(OmdbApiService.class);
 
                 //isso sim precisa entender:
                 String title = editTextSearch.getText().toString().trim();
@@ -60,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<SearchModel> call, Response<SearchModel> response) {
                         searchModel = response.body();
 
+                        if(searchModel.Search.toArray().length == 0){
+
+                            return;
+                        }
 
                         CustomListAdapter adapter = new CustomListAdapter(MainActivity.this, searchModel.Search);
 

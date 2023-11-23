@@ -41,9 +41,7 @@ public class ItemApiDetails extends AppCompatActivity {
 
         String imdbId = getIntent().getStringExtra("imdbId");
 
-        Retrofit retrofit = Util.createRetrofitImdb();
-
-        OmdbApiService omdbApiService = retrofit.create(OmdbApiService.class);
+        OmdbApiService omdbApiService = Util.createRetrofitImdb().create(OmdbApiService.class);
 
         Call<ItemDetailsModel> call = omdbApiService.searchById(imdbId);
 
