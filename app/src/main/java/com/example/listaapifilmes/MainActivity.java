@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         listViewItensApi = findViewById(R.id.listViewItensApi);
 
         editTextSearch = findViewById(R.id.editTextSearch);

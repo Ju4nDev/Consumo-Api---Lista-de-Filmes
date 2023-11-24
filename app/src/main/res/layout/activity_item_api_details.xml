@@ -5,13 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ItemApiDetails">
+    tools:context=".ItemApiDetails"
+    android:background="#EDEDED">
 
     <ImageView
         android:id="@+id/imageViewPoster"
         android:layout_width="match_parent"
         android:layout_height="362dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        android:layout_margin="20dp"
+        />
 
 
     <RatingBar
@@ -26,8 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
-        android:layout_margin="5dp"
-        android:elevation="20dp">
+        android:layout_margin="20dp"
+        >
 
         <ListView
             android:id="@+id/listViewDetails"

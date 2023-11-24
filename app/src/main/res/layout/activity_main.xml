@@ -5,22 +5,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    >
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextSearch"/>
-    
-    <Button
+        android:layout_height="60dp"
+        android:id="@+id/editTextSearch"
+        android:drawableStart="@drawable/custom_search_icon"
+        android:paddingStart="12dp"
+        android:drawablePadding="12dp"
+        android:background="@drawable/custom_input"
+        android:textColorHint="#222"
+        android:textColor="#F10000"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Pesquise um filme, série ou jogo..."/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Search"
+        android:id="@+id/btnSearch"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_button"
+        android:textColor="#fff"/>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Search"
-        android:id="@+id/btnSearch" />
+        app:cardCornerRadius="8dp"
+        android:layout_margin="20dp"
+        >
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listViewItensApi"/>
+        android:id="@+id/listViewItensApi"
+        />
+    </androidx.cardview.widget.CardView>
+
+
 
 </LinearLayout>
